@@ -1,0 +1,28 @@
+{% extends 'identity/base.html' %}
+
+{% block title_content %}登录{% endblock %}
+
+{% block body_content %}
+    <div class="content">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form_text_ipt">
+                <label>
+                    <input name="un" type="text" placeholder="用户名">
+                </label>
+            </div>
+            <div class="form_text_ipt">
+                <label>
+                    <input name="pw" type="password" placeholder="密码">
+                </label>
+            </div>
+            <div class="form_btn">
+                <button>登录</button>
+            </div>
+            <div class="form_reg_btn">
+                <span>还没有帐号？</span><a href="{% url 'identity:register' %}">马上注册</a>
+            </div>
+        </form>
+    </div>
+    </div>
+{% endblock %}

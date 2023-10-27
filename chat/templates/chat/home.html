@@ -1,0 +1,26 @@
+{% extends 'chat/base.html' %}
+{% block title_content %}home{% endblock %}
+
+{% block body_content %}
+    {% if user %}
+        <p>当前登录用户，{{ user.username }}</p>
+        <a href="{% url 'identity:logout' %}">退出登录</a>
+        <h3>What chat room would you like to enter?</h3><br>
+        <input id="room-name-input" type="text" size="100"><br>
+        <button onclick="sendRoomName()">进入</button>
+    {% else %}
+        <div>
+            <a href="{% url 'identity:login' %}">登录</a><br/>
+            <a href="{% url 'identity:register' %}">注册</a>
+        </div>
+        <hr>
+    {% endif %}
+    {% block js %}
+        <script>
+            function sendRoomName(event) {
+                let room = $('#room-name-input').val()
+                window.location.pathname = 'chat/room/' + room + '/'
+            }
+        </script>
+    {% endblock %}
+{% endblock %}

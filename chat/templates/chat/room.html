@@ -1,0 +1,41 @@
+{% extends 'chat/base.html' %}
+{% block title_content %}chatroom:{{ room }}{% endblock %}
+
+{% block body_content %}
+    <div>
+        <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+        <input id="chat-message-input" type="text" size="100"><br>
+        <button onclick="sendMessage()">发送</button>
+    </div>
+
+    <script>
+        socket = new WebSocket('ws://localhost:8000/chat/room/{{ room }}/')
+
+        function add(text) {
+            document.querySelector('#chat-log').value += (text + '\n');
+        }
+
+        socket.onopen = function (event) {
+            add('[连接成功]')
+        }
+
+        socket.onmessage = function (event) {
+            add(event.data)
+        }
+
+        socket.onclose = function (event) {
+            add('[断开连接]')
+        }
+
+        function sendMessage() {
+            let tag = $('#chat-message-input').val()
+            socket.send(tag)
+        }
+
+        function closeConn() {
+            socket.close()
+        }
+
+
+    </script>
+{% endblock %}

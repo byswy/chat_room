@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title_content %}{% endblock %}</title>
+    {% block base_css %}
+        <link href="{% static 'chat/libs/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+        {% block css %}{% endblock %}
+    {% endblock %}
+</head>
+
+<body>
+{% block body_content %}{% endblock %}
+
+{% block base_js %}
+    <script src="{% static 'chat/libs/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'chat/libs/jquery/jquery.min.js' %}"></script>
+    {% block js %}{% endblock %}
+{% endblock %}
+</body>
+</html>
